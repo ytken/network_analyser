@@ -1,0 +1,563 @@
+{
+    "device": {
+        "name": "server-01",
+        "id": null,
+        "role": null,
+        "primary_ip": {
+            "address": "192.168.122.43"
+        }
+    },
+    "host_snapshot": {
+        "interfaces": [
+            {
+                "name": "lo",
+                "inet": [
+                    "127.0.0.1/8"
+                ],
+                "inet6": [
+                    "::1/128"
+                ]
+            },
+            {
+                "name": "enp1s0",
+                "inet": [
+                    "192.168.122.43/24"
+                ],
+                "inet6": [
+                    "fe80::5054:ff:fe1a:d508/64"
+                ]
+            },
+            {
+                "name": "docker0",
+                "inet": [
+                    "172.17.0.1/16"
+                ],
+                "inet6": [
+                    "fe80::e8:35ff:fe44:e8a2/64"
+                ]
+            },
+            {
+                "name": "br-2061159f2e1b",
+                "inet": [
+                    "172.18.0.1/16"
+                ],
+                "inet6": [
+                    "fe80::a0df:d1ff:feb9:7812/64"
+                ]
+            },
+            {
+                "name": "vetha7254ea@if2",
+                "inet": [],
+                "inet6": [
+                    "fe80::14eb:34ff:fe99:b31c/64"
+                ]
+            }
+        ],
+        "routes": [
+            {
+                "dst": "default",
+                "via": "192.168.122.1",
+                "dev": "enp1s0"
+            },
+            {
+                "dst": "172.17.0.0/16",
+                "dev": "docker0"
+            },
+            {
+                "dst": "172.18.0.0/16",
+                "dev": "br-2061159f2e1b"
+            },
+            {
+                "dst": "192.168.122.0/24",
+                "dev": "enp1s0"
+            },
+            {
+                "dst": "192.168.122.1",
+                "dev": "enp1s0"
+            }
+        ],
+        "sockets": [
+            {
+                "protocol": "udp",
+                "local_address": "127.0.0.54:53",
+                "process": "uid:992 ino:18370 sk:1 cgroup:/system.slice/systemd-resolved.service <->"
+            },
+            {
+                "protocol": "udp",
+                "local_address": "127.0.0.53%lo:53",
+                "process": "uid:992 ino:18368 sk:2 cgroup:/system.slice/systemd-resolved.service <->"
+            },
+            {
+                "protocol": "udp",
+                "local_address": "192.168.122.43%enp1s0:68",
+                "process": "uid:998 ino:67208 sk:e cgroup:/system.slice/systemd-networkd.service <->"
+            },
+            {
+                "protocol": "udp",
+                "local_address": "0.0.0.0:35031",
+                "process": "uid:105 ino:21941 sk:4 cgroup:/system.slice/rsyslog.service <->"
+            },
+            {
+                "protocol": "udp",
+                "local_address": "0.0.0.0:51484",
+                "process": "uid:105 ino:21942 sk:5 cgroup:/system.slice/rsyslog.service <->"
+            },
+            {
+                "protocol": "tcp",
+                "local_address": "127.0.0.54:53",
+                "process": "uid:992 ino:18371 sk:6 cgroup:/system.slice/systemd-resolved.service <->"
+            },
+            {
+                "protocol": "tcp",
+                "local_address": "127.0.0.53%lo:53",
+                "process": "uid:992 ino:18369 sk:7 cgroup:/system.slice/systemd-resolved.service <->"
+            },
+            {
+                "protocol": "tcp",
+                "local_address": "*:22",
+                "process": "ino:7584 sk:8 cgroup:/system.slice/ssh.socket v6only:0 <->"
+            }
+        ],
+        "iptables": {
+            "INPUT": {
+                "policy": "ACCEPT",
+                "default_packets": 0,
+                "default_bytes": 0,
+                "rules": []
+            },
+            "FORWARD": {
+                "policy": "DROP",
+                "default_packets": 0,
+                "default_bytes": 0,
+                "rules": [
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "*",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "*",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    }
+                ]
+            },
+            "OUTPUT": {
+                "policy": "ACCEPT",
+                "default_packets": 0,
+                "default_bytes": 0,
+                "rules": [
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "!docker0 docker0",
+                        "extra": [
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "!br-2061159f2e1b br-2061159f2e1b",
+                        "extra": [
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "docker0",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "br-2061159f2e1b",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "docker0",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0",
+                            "ctstate RELATED,ESTABLISHED"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "br-2061159f2e1b",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0",
+                            "ctstate RELATED,ESTABLISHED"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "*",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "*",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "*",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "docker0 *",
+                        "extra": [
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "br-2061159f2e1b *",
+                        "extra": [
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "docker0 !docker0",
+                        "extra": [
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "br-2061159f2e1b !br-2061159f2e1b",
+                        "extra": [
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "br-2061159f2e1b",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "docker0",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    },
+                    {
+                        "pkts": 0,
+                        "bytes": 0,
+                        "target": null,
+                        "proto": null,
+                        "opt": null,
+                        "in": null,
+                        "out": "0",
+                        "source": "--",
+                        "destination": "*",
+                        "extra": [
+                            "*",
+                            "0.0.0.0/0",
+                            "0.0.0.0/0"
+                        ]
+                    }
+                ]
+            }
+        },
+        "hostname": "vm-ubuntu-netmon"
+    },
+    "docker_snapshot": {
+        "6be175ea35ba": [
+            {
+                "Id": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                "Created": "2025-04-04T13:46:46.609883584Z",
+                "State": {
+                    "Status": "running",
+                    "Running": true,
+                    "Paused": false,
+                    "Restarting": false,
+                    "OOMKilled": false,
+                    "Dead": false,
+                    "Pid": 10801,
+                    "ExitCode": 0,
+                    "Error": "",
+                    "StartedAt": "2025-04-06T10:55:22.831454601Z",
+                    "FinishedAt": "2025-04-05T12:54:19.05350132Z"
+                },
+                "Name": "/test-alpine",
+                "NetworkSettings": {
+                    "Bridge": "",
+                    "SandboxID": "9397bac133055c84da9f6c5bd2bb4089d8ab65c351d1a604f06cacf5ac49aa3d",
+                    "SandboxKey": "/var/run/docker/netns/9397bac13305",
+                    "Ports": {},
+                    "HairpinMode": false,
+                    "LinkLocalIPv6Address": "",
+                    "LinkLocalIPv6PrefixLen": 0,
+                    "SecondaryIPAddresses": null,
+                    "SecondaryIPv6Addresses": null,
+                    "EndpointID": "ade1e6a29e5f8a9aecbab912201fe324388825b22450baa4655800ecb9c6937e",
+                    "Gateway": "172.17.0.1",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "MacAddress": "42:57:dd:4d:54:a9",
+                    "Networks": {
+                        "bridge": {
+                            "IPAMConfig": null,
+                            "Links": null,
+                            "Aliases": null,
+                            "MacAddress": "42:57:dd:4d:54:a9",
+                            "DriverOpts": null,
+                            "GwPriority": 0,
+                            "NetworkID": "10327f62155f2a2ce154de39a6abfca7436f15ba4cacc9c872315dc487c4b6e7",
+                            "EndpointID": "ade1e6a29e5f8a9aecbab912201fe324388825b22450baa4655800ecb9c6937e",
+                            "Gateway": "172.17.0.1",
+                            "IPAddress": "172.17.0.2",
+                            "IPPrefixLen": 16,
+                            "IPv6Gateway": "",
+                            "GlobalIPv6Address": "",
+                            "GlobalIPv6PrefixLen": 0,
+                            "DNSNames": null
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "docker_events": [
+        {
+            "Type": "network",
+            "Action": "connect",
+            "Actor": {
+                "ID": "10327f62155f2a2ce154de39a6abfca7436f15ba4cacc9c872315dc487c4b6e7",
+                "Attributes": {
+                    "container": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                    "name": "bridge",
+                    "type": "bridge"
+                }
+            },
+            "scope": "local",
+            "time": 1743936923,
+            "timeNano": 1743936923026303735
+        },
+        {
+            "status": "start",
+            "id": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+            "from": "alpine",
+            "Type": "container",
+            "Action": "start",
+            "Actor": {
+                "ID": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                "Attributes": {
+                    "image": "alpine",
+                    "name": "test-alpine"
+                }
+            },
+            "scope": "local",
+            "time": 1743936923,
+            "timeNano": 1743936923054735733
+        },
+        {
+            "status": "restart",
+            "id": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+            "from": "alpine",
+            "Type": "container",
+            "Action": "restart",
+            "Actor": {
+                "ID": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                "Attributes": {
+                    "image": "alpine",
+                    "name": "test-alpine"
+                }
+            },
+            "scope": "local",
+            "time": 1743936923,
+            "timeNano": 1743936923054756533
+        }
+    ],
+    "network_journal": [
+        {
+            "timestamp": "2025-04-06T10:55:22",
+            "interface": "vetha7254ea",
+            "event": "Link UP"
+        },
+        {
+            "timestamp": "2025-04-06T10:55:23",
+            "interface": "vetha7254ea",
+            "event": "Gained carrier"
+        },
+        {
+            "timestamp": "2025-04-06T10:55:23",
+            "interface": "docker0",
+            "event": "Gained carrier"
+        },
+        {
+            "timestamp": "2025-04-06T10:55:24",
+            "interface": "vetha7254ea",
+            "event": "Gained IPv6LL"
+        }
+    ],
+    "timestamp": "2025-04-06T10:55:29Z"
+}

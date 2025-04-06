@@ -1,0 +1,5 @@
+/snapshots
+.env
+/docker-compose.yml
+/Dockerfile
+/__pycache__/

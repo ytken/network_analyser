@@ -1,0 +1,276 @@
+{
+    "device": {
+        "name": "server-01",
+        "primary_ip": {
+            "address": "192.168.122.43"
+        },
+        "custom_fields": {
+            "ssh_user": "netboxagent",
+            "ssh_password": "MySecurePass"
+        }
+    },
+    "host_snapshot": {
+        "hostname": "vm-ubuntu-netmon",
+        "interfaces": "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000\n    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00\n    inet 127.0.0.1/8 scope host lo\n       valid_lft forever preferred_lft forever\n    inet6 ::1/128 scope host noprefixroute \n       valid_lft forever preferred_lft forever\n2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000\n    link/ether 52:54:00:1a:d5:08 brd ff:ff:ff:ff:ff:ff\n    inet 192.168.122.43/24 metric 100 brd 192.168.122.255 scope global dynamic enp1s0\n       valid_lft 2548sec preferred_lft 2548sec\n    inet6 fe80::5054:ff:fe1a:d508/64 scope link \n       valid_lft forever preferred_lft forever\n3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default \n    link/ether 02:e8:35:44:e8:a2 brd ff:ff:ff:ff:ff:ff\n    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0\n       valid_lft forever preferred_lft forever\n    inet6 fe80::e8:35ff:fe44:e8a2/64 scope link \n       valid_lft forever preferred_lft forever\n11: br-2061159f2e1b: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default \n    link/ether a2:df:d1:b9:78:12 brd ff:ff:ff:ff:ff:ff\n    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-2061159f2e1b\n       valid_lft forever preferred_lft forever\n    inet6 fe80::a0df:d1ff:feb9:7812/64 scope link \n       valid_lft forever preferred_lft forever\n21: vetha7254ea@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default \n    link/ether 16:eb:34:99:b3:1c brd ff:ff:ff:ff:ff:ff link-netnsid 0\n    inet6 fe80::14eb:34ff:fe99:b31c/64 scope link \n       valid_lft forever preferred_lft forever",
+        "routes": "default via 192.168.122.1 dev enp1s0 proto dhcp src 192.168.122.43 metric 100 \n172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 \n172.18.0.0/16 dev br-2061159f2e1b proto kernel scope link src 172.18.0.1 linkdown \n192.168.122.0/24 dev enp1s0 proto kernel scope link src 192.168.122.43 metric 100 \n192.168.122.1 dev enp1s0 proto dhcp scope link src 192.168.122.43 metric 100",
+        "sockets": "Netid State  Recv-Q Send-Q         Local Address:Port  Peer Address:PortProcess                                                                  \nudp   UNCONN 0      0                 127.0.0.54:53         0.0.0.0:*    uid:992 ino:18370 sk:1 cgroup:/system.slice/systemd-resolved.service <->\nudp   UNCONN 0      0              127.0.0.53%lo:53         0.0.0.0:*    uid:992 ino:18368 sk:2 cgroup:/system.slice/systemd-resolved.service <->\nudp   UNCONN 0      0      192.168.122.43%enp1s0:68         0.0.0.0:*    uid:998 ino:67208 sk:e cgroup:/system.slice/systemd-networkd.service <->\nudp   UNCONN 0      0                    0.0.0.0:35031      0.0.0.0:*    uid:105 ino:21941 sk:4 cgroup:/system.slice/rsyslog.service <->         \nudp   UNCONN 0      0                    0.0.0.0:51484      0.0.0.0:*    uid:105 ino:21942 sk:5 cgroup:/system.slice/rsyslog.service <->         \ntcp   LISTEN 0      4096              127.0.0.54:53         0.0.0.0:*    uid:992 ino:18371 sk:6 cgroup:/system.slice/systemd-resolved.service <->\ntcp   LISTEN 0      4096           127.0.0.53%lo:53         0.0.0.0:*    uid:992 ino:18369 sk:7 cgroup:/system.slice/systemd-resolved.service <->\ntcp   LISTEN 0      4096                       *:22               *:*    ino:7584 sk:8 cgroup:/system.slice/ssh.socket v6only:0 <->",
+        "iptables": "Chain INPUT (policy ACCEPT 0 packets, 0 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n\nChain FORWARD (policy DROP 0 packets, 0 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n   30  2520 DOCKER-USER  0    --  *      *       0.0.0.0/0            0.0.0.0/0           \n   30  2520 DOCKER-FORWARD  0    --  *      *       0.0.0.0/0            0.0.0.0/0           \n\nChain OUTPUT (policy ACCEPT 0 packets, 0 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n\nChain DOCKER (2 references)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 DROP       0    --  !docker0 docker0  0.0.0.0/0            0.0.0.0/0           \n    0     0 DROP       0    --  !br-2061159f2e1b br-2061159f2e1b  0.0.0.0/0            0.0.0.0/0           \n\nChain DOCKER-BRIDGE (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 DOCKER     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           \n    0     0 DOCKER     0    --  *      br-2061159f2e1b  0.0.0.0/0            0.0.0.0/0           \n\nChain DOCKER-CT (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n   15  1260 ACCEPT     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED\n    0     0 ACCEPT     0    --  *      br-2061159f2e1b  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED\n\nChain DOCKER-FORWARD (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n   30  2520 DOCKER-CT  0    --  *      *       0.0.0.0/0            0.0.0.0/0           \n   15  1260 DOCKER-ISOLATION-STAGE-1  0    --  *      *       0.0.0.0/0            0.0.0.0/0           \n   15  1260 DOCKER-BRIDGE  0    --  *      *       0.0.0.0/0            0.0.0.0/0           \n   15  1260 ACCEPT     0    --  docker0 *       0.0.0.0/0            0.0.0.0/0           \n    0     0 ACCEPT     0    --  br-2061159f2e1b *       0.0.0.0/0            0.0.0.0/0           \n\nChain DOCKER-ISOLATION-STAGE-1 (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n   15  1260 DOCKER-ISOLATION-STAGE-2  0    --  docker0 !docker0  0.0.0.0/0            0.0.0.0/0           \n    0     0 DOCKER-ISOLATION-STAGE-2  0    --  br-2061159f2e1b !br-2061159f2e1b  0.0.0.0/0            0.0.0.0/0           \n\nChain DOCKER-ISOLATION-STAGE-2 (2 references)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 DROP       0    --  *      br-2061159f2e1b  0.0.0.0/0            0.0.0.0/0           \n    0     0 DROP       0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           \n\nChain DOCKER-USER (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n   30  2520 RETURN     0    --  *      *       0.0.0.0/0            0.0.0.0/0"
+    },
+    "docker_snapshot": {
+        "6be175ea35ba": [
+            {
+                "Id": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                "Created": "2025-04-04T13:46:46.609883584Z",
+                "Path": "sleep",
+                "Args": [
+                    "3600"
+                ],
+                "State": {
+                    "Status": "running",
+                    "Running": true,
+                    "Paused": false,
+                    "Restarting": false,
+                    "OOMKilled": false,
+                    "Dead": false,
+                    "Pid": 10801,
+                    "ExitCode": 0,
+                    "Error": "",
+                    "StartedAt": "2025-04-06T10:55:22.831454601Z",
+                    "FinishedAt": "2025-04-05T12:54:19.05350132Z"
+                },
+                "Image": "sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b",
+                "ResolvConfPath": "/var/lib/docker/containers/6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9/resolv.conf",
+                "HostnamePath": "/var/lib/docker/containers/6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9/hostname",
+                "HostsPath": "/var/lib/docker/containers/6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9/hosts",
+                "LogPath": "/var/lib/docker/containers/6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9/6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9-json.log",
+                "Name": "/test-alpine",
+                "RestartCount": 0,
+                "Driver": "overlay2",
+                "Platform": "linux",
+                "MountLabel": "",
+                "ProcessLabel": "",
+                "AppArmorProfile": "docker-default",
+                "ExecIDs": null,
+                "HostConfig": {
+                    "Binds": null,
+                    "ContainerIDFile": "",
+                    "LogConfig": {
+                        "Type": "json-file",
+                        "Config": {}
+                    },
+                    "NetworkMode": "bridge",
+                    "PortBindings": {},
+                    "RestartPolicy": {
+                        "Name": "no",
+                        "MaximumRetryCount": 0
+                    },
+                    "AutoRemove": false,
+                    "VolumeDriver": "",
+                    "VolumesFrom": null,
+                    "ConsoleSize": [
+                        45,
+                        190
+                    ],
+                    "CapAdd": null,
+                    "CapDrop": null,
+                    "CgroupnsMode": "private",
+                    "Dns": [],
+                    "DnsOptions": [],
+                    "DnsSearch": [],
+                    "ExtraHosts": null,
+                    "GroupAdd": null,
+                    "IpcMode": "private",
+                    "Cgroup": "",
+                    "Links": null,
+                    "OomScoreAdj": 0,
+                    "PidMode": "",
+                    "Privileged": false,
+                    "PublishAllPorts": false,
+                    "ReadonlyRootfs": false,
+                    "SecurityOpt": null,
+                    "UTSMode": "",
+                    "UsernsMode": "",
+                    "ShmSize": 67108864,
+                    "Runtime": "runc",
+                    "Isolation": "",
+                    "CpuShares": 0,
+                    "Memory": 0,
+                    "NanoCpus": 0,
+                    "CgroupParent": "",
+                    "BlkioWeight": 0,
+                    "BlkioWeightDevice": [],
+                    "BlkioDeviceReadBps": [],
+                    "BlkioDeviceWriteBps": [],
+                    "BlkioDeviceReadIOps": [],
+                    "BlkioDeviceWriteIOps": [],
+                    "CpuPeriod": 0,
+                    "CpuQuota": 0,
+                    "CpuRealtimePeriod": 0,
+                    "CpuRealtimeRuntime": 0,
+                    "CpusetCpus": "",
+                    "CpusetMems": "",
+                    "Devices": [],
+                    "DeviceCgroupRules": null,
+                    "DeviceRequests": null,
+                    "MemoryReservation": 0,
+                    "MemorySwap": 0,
+                    "MemorySwappiness": null,
+                    "OomKillDisable": null,
+                    "PidsLimit": null,
+                    "Ulimits": [],
+                    "CpuCount": 0,
+                    "CpuPercent": 0,
+                    "IOMaximumIOps": 0,
+                    "IOMaximumBandwidth": 0,
+                    "MaskedPaths": [
+                        "/proc/asound",
+                        "/proc/acpi",
+                        "/proc/interrupts",
+                        "/proc/kcore",
+                        "/proc/keys",
+                        "/proc/latency_stats",
+                        "/proc/timer_list",
+                        "/proc/timer_stats",
+                        "/proc/sched_debug",
+                        "/proc/scsi",
+                        "/sys/firmware",
+                        "/sys/devices/virtual/powercap"
+                    ],
+                    "ReadonlyPaths": [
+                        "/proc/bus",
+                        "/proc/fs",
+                        "/proc/irq",
+                        "/proc/sys",
+                        "/proc/sysrq-trigger"
+                    ]
+                },
+                "GraphDriver": {
+                    "Data": {
+                        "ID": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                        "LowerDir": "/var/lib/docker/overlay2/b32827077048c79a0ceef42ee03cf47ab4fb8997e0f3631107fedef44cf57d01-init/diff:/var/lib/docker/overlay2/29b6d7e465b9b6f640bb6fc614491d5c22b43726bd2a3180a02ac0b8f2ee1a59/diff",
+                        "MergedDir": "/var/lib/docker/overlay2/b32827077048c79a0ceef42ee03cf47ab4fb8997e0f3631107fedef44cf57d01/merged",
+                        "UpperDir": "/var/lib/docker/overlay2/b32827077048c79a0ceef42ee03cf47ab4fb8997e0f3631107fedef44cf57d01/diff",
+                        "WorkDir": "/var/lib/docker/overlay2/b32827077048c79a0ceef42ee03cf47ab4fb8997e0f3631107fedef44cf57d01/work"
+                    },
+                    "Name": "overlay2"
+                },
+                "Mounts": [],
+                "Config": {
+                    "Hostname": "6be175ea35ba",
+                    "Domainname": "",
+                    "User": "",
+                    "AttachStdin": false,
+                    "AttachStdout": false,
+                    "AttachStderr": false,
+                    "Tty": false,
+                    "OpenStdin": false,
+                    "StdinOnce": false,
+                    "Env": [
+                        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+                    ],
+                    "Cmd": [
+                        "sleep",
+                        "3600"
+                    ],
+                    "Image": "alpine",
+                    "Volumes": null,
+                    "WorkingDir": "/",
+                    "Entrypoint": null,
+                    "OnBuild": null,
+                    "Labels": {}
+                },
+                "NetworkSettings": {
+                    "Bridge": "",
+                    "SandboxID": "9397bac133055c84da9f6c5bd2bb4089d8ab65c351d1a604f06cacf5ac49aa3d",
+                    "SandboxKey": "/var/run/docker/netns/9397bac13305",
+                    "Ports": {},
+                    "HairpinMode": false,
+                    "LinkLocalIPv6Address": "",
+                    "LinkLocalIPv6PrefixLen": 0,
+                    "SecondaryIPAddresses": null,
+                    "SecondaryIPv6Addresses": null,
+                    "EndpointID": "ade1e6a29e5f8a9aecbab912201fe324388825b22450baa4655800ecb9c6937e",
+                    "Gateway": "172.17.0.1",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "MacAddress": "42:57:dd:4d:54:a9",
+                    "Networks": {
+                        "bridge": {
+                            "IPAMConfig": null,
+                            "Links": null,
+                            "Aliases": null,
+                            "MacAddress": "42:57:dd:4d:54:a9",
+                            "DriverOpts": null,
+                            "GwPriority": 0,
+                            "NetworkID": "10327f62155f2a2ce154de39a6abfca7436f15ba4cacc9c872315dc487c4b6e7",
+                            "EndpointID": "ade1e6a29e5f8a9aecbab912201fe324388825b22450baa4655800ecb9c6937e",
+                            "Gateway": "172.17.0.1",
+                            "IPAddress": "172.17.0.2",
+                            "IPPrefixLen": 16,
+                            "IPv6Gateway": "",
+                            "GlobalIPv6Address": "",
+                            "GlobalIPv6PrefixLen": 0,
+                            "DNSNames": null
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "docker_events": [
+        {
+            "Type": "network",
+            "Action": "connect",
+            "Actor": {
+                "ID": "10327f62155f2a2ce154de39a6abfca7436f15ba4cacc9c872315dc487c4b6e7",
+                "Attributes": {
+                    "container": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                    "name": "bridge",
+                    "type": "bridge"
+                }
+            },
+            "scope": "local",
+            "time": 1743936923,
+            "timeNano": 1743936923026303735
+        },
+        {
+            "status": "start",
+            "id": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+            "from": "alpine",
+            "Type": "container",
+            "Action": "start",
+            "Actor": {
+                "ID": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                "Attributes": {
+                    "image": "alpine",
+                    "name": "test-alpine"
+                }
+            },
+            "scope": "local",
+            "time": 1743936923,
+            "timeNano": 1743936923054735733
+        },
+        {
+            "status": "restart",
+            "id": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+            "from": "alpine",
+            "Type": "container",
+            "Action": "restart",
+            "Actor": {
+                "ID": "6be175ea35bace2379471c55464d251188697f1b1cbac82b560f9d3f748846f9",
+                "Attributes": {
+                    "image": "alpine",
+                    "name": "test-alpine"
+                }
+            },
+            "scope": "local",
+            "time": 1743936923,
+            "timeNano": 1743936923054756533
+        }
+    ],
+    "network_journal": "Apr 06 10:55:22 vm-ubuntu-netmon systemd-networkd[2153]: vetha7254ea: Link UP\nApr 06 10:55:23 vm-ubuntu-netmon systemd-networkd[2153]: vetha7254ea: Gained carrier\nApr 06 10:55:23 vm-ubuntu-netmon systemd-networkd[2153]: docker0: Gained carrier\nApr 06 10:55:24 vm-ubuntu-netmon systemd-networkd[2153]: vetha7254ea: Gained IPv6LL",
+    "timestamp": "2025-04-06T10:55:29Z"
+}
